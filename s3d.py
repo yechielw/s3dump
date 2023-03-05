@@ -63,9 +63,9 @@ try:
         if not key.text.endswith("/"):
 
 
-            for ind in keys:
+            #for ind in keys:
                     
-                index += 1
+            index += 1
             print(str(index) +": " + key.text)
             if download == True:
                 download_file(url+key.text)

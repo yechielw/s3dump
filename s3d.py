@@ -5,14 +5,14 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import requests
 import argparse
-from tqdm import tqdm
-
-def my_progress_bar(current_value, max_value):
+from tqdm.auto import tqdm
+from time import sleep
+def my_progress_bar(current_value, max_value,file_name):
     progress = current_value / max_value
     bar_length = 50
     filled_length = int(bar_length * progress)
     bar = '=' * filled_length + '-' * (bar_length - filled_length)
-    tqdm.write(f"[{bar}] {progress:.0%}")
+    tqdm.write(f"\r[{bar}] {progress:.0%} : {file_name}", end="")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-d', action='store_true')
@@ -66,10 +66,10 @@ try:
             #for ind in keys:
                     
             index += 1
-            print(str(index) +": " + key.text)
             if download == True:
                 download_file(url+key.text)
-                my_progress_bar(index,total)
+                sleep(1)
+                my_progress_bar(index,total,key.text.split("/")[-1])
 except KeyboardInterrupt:
     print("\nGoodbye :)")
 

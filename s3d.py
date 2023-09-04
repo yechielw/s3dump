@@ -70,6 +70,8 @@ try:
                 download_file(url+key.text)
                 sleep(1)
                 my_progress_bar(index,total,key.text.split("/")[-1])
+            else:
+                print(key.text)
 except KeyboardInterrupt:
     print("\nGoodbye :)")
 

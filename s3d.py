@@ -17,9 +17,12 @@ def my_progress_bar(current_value, max_value, file_name):
     tqdm.write(f"\r[{bar}] {progress:.0%} : {file_name}", end="")
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-d', action='store_true')
+
+parser.add_argument('-d', action='store_true',
+                    help="Download files instead of dry run")
 parser.add_argument('-u', type=str, required=True,
-                    help='URL of the open S3 bucket to enumerate')
+                    help="URL of the S3 bucket to process (required)")
+
 args = parser.parse_args()
 
 download = args.d

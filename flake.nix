@@ -18,13 +18,14 @@
           format = "pyproject";
           src = self;
           propagatedBuildInputs = with python.pkgs; [ requests tqdm ];
+          nativeBuildInputs = with python.pkgs; [ setuptools wheel ];
           checkInputs = with python.pkgs; [ pytest ];
           doCheck = true;
         };
 
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            (python.withPackages (p: with p; [ requests tqdm pytest ]))
+            (python.withPackages (p: with p; [ requests tqdm pytest setuptools wheel ]))
           ];
         };
       });

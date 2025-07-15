@@ -1,14 +1,16 @@
-#!/bin/python
+#!/usr/bin/env python3
 import sys
 import requests
 import xml.etree.ElementTree as ET
 from pathlib import Path
-import requests
 import argparse
 from tqdm.auto import tqdm
 from time import sleep
-def my_progress_bar(current_value, max_value,file_name):
-    progress = current_value / max_value
+def my_progress_bar(current_value, max_value, file_name):
+    if max_value == 0:
+        progress = 0
+    else:
+        progress = current_value / max_value
     bar_length = 50
     filled_length = int(bar_length * progress)
     bar = '=' * filled_length + '-' * (bar_length - filled_length)
@@ -16,7 +18,8 @@ def my_progress_bar(current_value, max_value,file_name):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-d', action='store_true')
-parser.add_argument('-u', type=str)
+parser.add_argument('-u', type=str, required=True,
+                    help='URL of the open S3 bucket to enumerate')
 args = parser.parse_args()
 
 download = args.d

@@ -1,2 +1,2 @@
 # s3dump
-Easly list and dump open s3 buckets
+Easily list and dump open s3 buckets

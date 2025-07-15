@@ -1,24 +1,28 @@
-#!/bin/python
+#!/usr/bin/env python3
 import sys
 import requests
 import xml.etree.ElementTree as ET
 from pathlib import Path
-import requests
 import argparse
 from tqdm.auto import tqdm
 from time import sleep
-def my_progress_bar(current_value, max_value,file_name):
-    progress = current_value / max_value
+def my_progress_bar(current_value, max_value, file_name):
+    if max_value == 0:
+        progress = 0
+    else:
+        progress = current_value / max_value
     bar_length = 50
     filled_length = int(bar_length * progress)
     bar = '=' * filled_length + '-' * (bar_length - filled_length)
     tqdm.write(f"\r[{bar}] {progress:.0%} : {file_name}", end="")
 
 parser = argparse.ArgumentParser()
+
 parser.add_argument('-d', action='store_true',
                     help="Download files instead of dry run")
 parser.add_argument('-u', type=str, required=True,
                     help="URL of the S3 bucket to process (required)")
+
 args = parser.parse_args()
 
 download = args.d
@@ -31,7 +35,7 @@ if not url.startswith("http"):
     sys.exit("Not a url")
 
 
-# a function that downloads a binery file and cerats its parent directory if doesnt exits
+# Downloads a binary file and creates its parent directory if it doesn't exist
 def download_file(url):
     local_filename =  ("/".join(url.split('/')[2:]))
     local_directory =  ("/".join(url.split('/')[2:-1]))

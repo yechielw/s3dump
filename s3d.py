@@ -32,7 +32,7 @@ if not url.startswith("http"):
     sys.exit("Not a url")
 
 
-# a function that downloads a binery file and cerats its parent directory if doesnt exits
+# Downloads a binary file and creates its parent directory if it doesn't exist
 def download_file(url):
     local_filename =  ("/".join(url.split('/')[2:]))
     local_directory =  ("/".join(url.split('/')[2:-1]))

@@ -18,7 +18,9 @@
           format = "pyproject";
           src = self;
           propagatedBuildInputs = with python.pkgs; [ requests tqdm ];
+
           nativeBuildInputs = with python.pkgs; [ setuptools wheel ];
+
           checkInputs = with python.pkgs; [ pytest ];
           doCheck = true;
         };
